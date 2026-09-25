@@ -1,6 +1,6 @@
 {
   "name": "gingerguide",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Official CLI for the Gingerguide city catalog API: list cities, fetch a city guide, check health. Public, no auth.",
   "bin": {
     "gingerguide": "bin/gingerguide.mjs"
