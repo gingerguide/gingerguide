@@ -1,9 +1,10 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "app.gingerguide/catalog",
+  "title": "Gingerguide City Catalog",
   "description": "Read-only MCP for the Gingerguide catalog of European cities and their narrated tour sights.",
-  "version": "1.0.0",
-  "websiteUrl": "https://gingerguide.app/llms.txt",
+  "version": "1.0.1",
+  "websiteUrl": "https://gingerguide.app/developers/",
   "repository": {
     "url": "https://github.com/ozalpege243/gingerguide",
     "source": "github"
