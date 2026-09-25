@@ -103,6 +103,17 @@ The same skills are also served from the website at `https://gingerguide.app/.we
 | `GET https://gingerguide.app/api/cities/{id}.json` | One city with all its sights |
 | `GET https://gingerguide.app/api/openapi.json` | The OpenAPI description |
 
+## CLI
+
+The [`cli/`](cli/) folder has the source of the official command-line client. It is on npm as [`gingerguide`](https://www.npmjs.com/package/gingerguide).
+
+```bash
+npx gingerguide cities
+npx gingerguide city rome
+npx gingerguide countries
+npx gingerguide health
+```
+
 ## Rules for agents
 
 - Only state coverage that the data confirms. Do not invent a guide or a sight.
