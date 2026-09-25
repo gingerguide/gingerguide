@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "gingerguide": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://gingerguide.app/mcp"]
+    }
+  }
+}

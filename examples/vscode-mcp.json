@@ -1,0 +1,5 @@
+{
+  "servers": {
+    "gingerguide": { "type": "http", "url": "https://gingerguide.app/mcp" }
+  }
+}
