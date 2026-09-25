@@ -20,7 +20,7 @@
   "homepage": "https://gingerguide.app/developers/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ozalpege243/gingerguide.git",
+    "url": "git+https://github.com/gingerguide/gingerguide.git",
     "directory": "cli"
   },
   "bugs": {

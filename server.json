@@ -3,10 +3,10 @@
   "name": "app.gingerguide/catalog",
   "title": "Gingerguide City Catalog",
   "description": "Read-only MCP for the Gingerguide catalog of European cities and their narrated tour sights.",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "websiteUrl": "https://gingerguide.app/developers/",
   "repository": {
-    "url": "https://github.com/ozalpege243/gingerguide",
+    "url": "https://github.com/gingerguide/gingerguide",
     "source": "github"
   },
   "remotes": [
