@@ -1,6 +1,6 @@
 # Gingerguide MCP server and agent skills
 
-**[Gingerguide](https://gingerguide.app) is a self-guided audio walking tour app for iPhone and Android.** It covers 153 European cities and 2,900+ narrated sights in 33 countries. Each sight has a researched 2 to 3 minute story, read by a lifelike AI voice, in English, Spanish, French, German, Turkish and Chinese. Cities work fully offline.
+**[Gingerguide](https://gingerguide.app) is a self-guided audio walking tour app for iPhone and Android.** It covers 166 European cities and 3,000+ narrated sights in 36 countries. Each sight has a researched 2 to 3 minute story, read by a lifelike AI voice, in English, Spanish, French, German, Turkish and Chinese. Cities work fully offline.
 
 This repository lets AI assistants and agents use the Gingerguide catalog. It contains:
 
