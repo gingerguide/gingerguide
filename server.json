@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "app.gingerguide/catalog",
-  "title": "Gingerguide City Catalog",
-  "description": "Read-only MCP for the Gingerguide catalog of European cities and their narrated tour sights.",
-  "version": "1.0.2",
+  "title": "Gingerguide: European city walking tours",
+  "description": "Read-only European city sights: search, nearby, walking routes and itineraries in 6 languages.",
+  "version": "2.0.0",
   "websiteUrl": "https://gingerguide.app/developers/",
   "repository": {
     "url": "https://github.com/gingerguide/gingerguide",
@@ -12,7 +12,15 @@
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://gingerguide.app/mcp"
+      "url": "https://gingerguide.app/mcp",
+      "headers": [
+        {
+          "name": "Authorization",
+          "description": "Optional. 'Bearer ggk_...' free key from https://gingerguide.app/developers/#api-key raises the daily limit. The server works without it.",
+          "isRequired": false,
+          "isSecret": true
+        }
+      ]
     }
   ]
 }
