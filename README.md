@@ -8,17 +8,39 @@ This repository lets AI assistants and agents use the Gingerguide catalog. It co
 - Two **agent skills** (`SKILL.md` format) for audio tour lookup and one-day city walks.
 - Ready-to-copy **client configs** and **curl examples**.
 
-The server is read-only. It needs no API key and no sign-in.
+The server is read-only. It needs no API key and no sign-in. An optional free API key raises the daily limit (see [Optional free API key](#optional-free-api-key)).
 
 | | |
 |---|---|
 | MCP endpoint | `https://gingerguide.app/mcp` |
 | Transport | Streamable HTTP (stateless, JSON responses) |
-| Auth | None |
+| Auth | None required (optional free API key) |
 | MCP Registry name | `app.gingerguide/catalog` |
 | Developer docs | <https://gingerguide.app/developers/> |
 | OpenAPI (REST) | <https://gingerguide.app/api/openapi.json> |
 | llms.txt | <https://gingerguide.app/llms.txt> |
+
+## Optional free API key
+
+The server works without a key. Without a key, it allows 1,000 tool calls per IP address per UTC day. Hosted assistants such as Claude and ChatGPT call from a few shared IP addresses, so their requests get 50,000 per IP address per day. A free key raises the limit to 20,000 tool calls per key per day and shows your usage. It is useful when your agent runs on a shared cloud (Vercel, AWS, Cloudflare). Only `tools/call` counts. There is no sign-up and no email.
+
+```bash
+# Create a key (it is shown once; the server stores only its hash)
+curl -sS -X POST https://gingerguide.app/api/keys \
+  -H 'content-type: application/json' -d '{"label":"my-agent"}'
+
+# Use it
+curl -sS https://gingerguide.app/mcp \
+  -H 'authorization: Bearer ggk_...' \
+  -H 'content-type: application/json' -H 'accept: application/json' \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+
+# Usage for the last 30 days, and revoke
+curl -sS https://gingerguide.app/api/keys/me -H 'authorization: Bearer ggk_...'
+curl -sS -X DELETE https://gingerguide.app/api/keys/me -H 'authorization: Bearer ggk_...'
+```
+
+You can also send the key as `X-API-Key`. An unknown or revoked key gets HTTP 401. Remove the header to continue without a key. Tool-call responses carry `RateLimit` and `X-RateLimit-Remaining` headers. Details: <https://gingerguide.app/developers/#api-key>.
 
 ## Tools
 
