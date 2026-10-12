@@ -4,7 +4,7 @@
 
 This repository lets AI assistants and agents use the Gingerguide catalog. It contains:
 
-- The connection details for the public **Gingerguide MCP server** at `https://gingerguide.app/mcp`.
+- The connection details for the public **Gingerguide MCP server** at `https://gingerguide.app/mcp`. Its 11 tools find sights by interest, historical period or location, recommend sights and cities, and plan walking tours and multi-day itineraries, in six languages.
 - Two **agent skills** (`SKILL.md` format) for audio tour lookup and one-day city walks.
 - Ready-to-copy **client configs** and **curl examples**.
 
@@ -44,14 +44,37 @@ You can also send the key as `X-API-Key`. An unknown or revoked key gets HTTP 40
 
 ## Tools
 
-| Tool | What it does | Arguments |
-|---|---|---|
-| `search_cities` | Finds cities by name or country. Returns the number of sights and the web guide URL for each city. | `query`, `country`, `limit` (all optional) |
-| `get_city_guide` | Returns one city with all its narrated sights: name, one-line description, category, coordinates and visit time in minutes. | `city_id` (for example `rome`) |
-| `list_countries` | Lists the covered countries and the number of cities in each. | none |
-| `get_catalog_overview` | Returns catalog totals, supported languages and app download links. | none |
+Every tool is read-only (`readOnlyHint: true`) and accepts `language`: `en`, `es`, `fr`, `de`, `tr` or `zh`.
 
-All tools are marked `readOnlyHint: true`.
+### Find
+
+| Tool | What it does | Main arguments |
+|---|---|---|
+| `search_attractions` | Searches sights in all cities or in one city, by free text, category, interest, historical period, indoor or outdoor, visit length, or distance from a point. Example: five Byzantine sights in Istanbul. | `query`, `city_id`, `country`, `categories`, `interests`, `periods`, `setting`, `near_lat`, `near_lng`, `radius_km`, `sort`, `limit` |
+| `find_nearby_attractions` | Returns the sights closest to a latitude and longitude, with walking minutes. If no sight is in the radius, it returns the nearest covered city. | `lat`, `lng`, `radius_km`, `interests`, `categories`, `pace` |
+| `get_attraction` | Returns one sight: long description, a notable fact, photo, coordinates, map link, visit time and the nearest other sights. | `attraction_id` (for example `rome-colosseum`) |
+| `search_cities` | Finds cities by name (in any of the six languages), country or region. Returns the city id that the other tools need. | `query`, `country`, `limit` |
+| `get_city_guide` | Returns one city: overview, headline sights, lesser-known sights, and every sight with category, coordinates and visit time. `detail: "full"` adds every long description. | `city_id`, `detail` |
+| `list_countries` | Lists the covered countries with their city ids. | none |
+| `get_catalog_overview` | Returns coverage totals, languages, and the exact values that the `categories`, `interests` and `periods` filters accept. | none |
+
+### Recommend
+
+| Tool | What it does | Main arguments |
+|---|---|---|
+| `recommend_attractions` | Picks sights in one city for the traveler's interests, favourite periods, headline sights or hidden gems, indoor or outdoor, and time available. Each pick says why it was chosen. | `city_id`, `interests`, `periods`, `style`, `setting`, `available_minutes`, `exclude_ids` |
+| `recommend_destinations` | Ranks cities for interests or historical periods, for example "best cities for Byzantine history", and says why. | `interests`, `periods`, `country`, `trip_days` |
+
+### Plan
+
+| Tool | What it does | Main arguments |
+|---|---|---|
+| `plan_walking_tour` | Builds an ordered walking route in one city for a time budget. Returns each stop with walking minutes, time on site, clock times, and a Google Maps walking link. | `city_id`, `duration_minutes`, `interests`, `periods`, `style`, `pace`, `start_lat`, `start_lng` or `start_attraction_id`, `start_time`, `must_include` |
+| `plan_trip_itinerary` | Plans 1 to 7 days in one city. Each day covers one or two walkable areas, with a public transport hop between them. | `city_id`, `days`, `hours_per_day`, `interests`, `periods`, `style`, `pace`, `start_time` |
+
+**Filter values.** Interests: `history`, `architecture`, `art`, `museums`, `religious_sites`, `archaeology`, `nature`, `views`, `food`, `local_life`, `shopping`, `relaxing`, `royalty`, `military`, `music`, `literature`, `science`, `performing_arts`, `memorials`. Periods: `prehistoric`, `ancient_greek`, `etruscan`, `roman`, `byzantine`, `medieval`, `gothic`, `moorish_islamic`, `ottoman`, `renaissance`, `baroque`, `georgian_neoclassical`, `nineteenth_century`, `art_nouveau`, `twentieth_century_modern`, `world_war_ii`, `cold_war`. Style: `must_see`, `balanced`, `hidden_gems`. Pace: `relaxed`, `normal`, `brisk`.
+
+**Limits of the data.** Interests, periods and indoor or outdoor are derived from each sight's category and description. Walking times are estimates (straight-line distance x 1.3 at the chosen pace). Opening hours, ticket prices and bookings are not included. Bad input returns an error that names the allowed values.
 
 ## Connect a client
 
@@ -101,10 +124,14 @@ Any MCP client that supports remote Streamable HTTP servers can connect to `http
 
 ## Example prompts
 
+- "Find five Byzantine historical sights in Istanbul."
+- "Plan a two-hour historical walking tour of Rome starting at 10:00."
+- "I'm staying near St. Stephen's Cathedral in Vienna. What can I walk to in 10 minutes?"
+- "Plan three days in Vienna for art and music lovers."
+- "Which European cities are best for Byzantine history?"
+- "Show me hidden gems in Paris for architecture lovers, indoors because it is raining."
+- "Tell me about the Colosseum, in German."
 - "Is there an audio walking tour for Seville?"
-- "Plan a one-day walk in Florence with the Gingerguide sights, in walking order."
-- "Which Gingerguide cities are in Portugal?"
-- "How many cities and languages does Gingerguide cover?"
 
 ## Agent skills
 

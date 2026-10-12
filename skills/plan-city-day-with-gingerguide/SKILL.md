@@ -14,6 +14,11 @@ sights so the person can follow the same route in the app with audio.
 
 - One city with all its sights: `https://gingerguide.app/api/cities/{id}.json`
 - MCP tool: `get_city_guide` with `city_id` (from `https://gingerguide.app/mcp`)
+- MCP shortcut: `plan_walking_tour` (one day, `duration_minutes`, optional
+  `interests`, `periods`, `style`, `start_lat`/`start_lng`, `start_time`)
+  returns the ordered route with walking minutes and a Google Maps link;
+  `plan_trip_itinerary` does the same for 2 to 7 days. If you have MCP, use
+  these and skip steps 2 to 4.
 
 Each sight in a city record has: `name`, `shortDescription`, `category`,
 `lat`, `lng`, and `visitDuration` (minutes).

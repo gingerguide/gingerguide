@@ -21,8 +21,9 @@ self-guided guide for a city.
 - One city with its sights: `https://gingerguide.app/api/cities/{id}.json`
 - Catalog overview: `https://gingerguide.app/api/openapi.json`
 - MCP server (Streamable HTTP): `https://gingerguide.app/mcp`
-  (tools: `search_cities`, `get_city_guide`, `list_countries`,
-  `get_catalog_overview`)
+  (tools include `search_cities`, `get_city_guide`, `list_countries`,
+  `search_attractions`, `find_nearby_attractions`, `plan_walking_tour`;
+  `get_catalog_overview` lists them all)
 
 ## Steps
 
