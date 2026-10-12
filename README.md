@@ -4,7 +4,7 @@
 
 This repository lets AI assistants and agents use the Gingerguide catalog. It contains:
 
-- The connection details for the public **Gingerguide MCP server** at `https://gingerguide.app/mcp`. Its 11 tools find sights by interest, historical period or location, recommend sights and cities, and plan walking tours and multi-day itineraries, in six languages.
+- The connection details for the public **Gingerguide MCP server** at `https://gingerguide.app/mcp`. Its 13 tools find sights by interest, historical period or location, recommend sights and cities, compare cities, find day trips, and plan walking tours and multi-day itineraries, in six languages.
 - Two **agent skills** (`SKILL.md` format) for audio tour lookup and one-day city walks.
 - Ready-to-copy **client configs** and **curl examples**.
 
@@ -64,6 +64,8 @@ Every tool is read-only (`readOnlyHint: true`) and accepts `language`: `en`, `es
 |---|---|---|
 | `recommend_attractions` | Picks sights in one city for the traveler's interests, favourite periods, headline sights or hidden gems, indoor or outdoor, and time available. Each pick says why it was chosen. | `city_id`, `interests`, `periods`, `style`, `setting`, `available_minutes`, `exclude_ids` |
 | `recommend_destinations` | Ranks cities for interests or historical periods, for example "best cities for Byzantine history", and says why. | `interests`, `periods`, `country`, `trip_days` |
+| `compare_cities` | Compares two to four cities side by side: sights, days needed, strongest interests and periods, share of indoor sights, headline sights and the distance between them. Says which city is stronger for each interest or period. | `city_ids`, `interests`, `periods`, `trip_days` |
+| `find_day_trips` | Lists covered cities that make a day trip from a base city, ranked by distance, interests and fame, with what to see there in one day. Sea crossings that need a flight are left out; short ferry trips are marked. | `city_id`, `max_distance_km`, `interests`, `periods`, `hours_on_site` |
 
 ### Plan
 
@@ -74,7 +76,7 @@ Every tool is read-only (`readOnlyHint: true`) and accepts `language`: `en`, `es
 
 **Filter values.** Interests: `history`, `architecture`, `art`, `museums`, `religious_sites`, `archaeology`, `nature`, `views`, `food`, `local_life`, `shopping`, `relaxing`, `royalty`, `military`, `music`, `literature`, `science`, `performing_arts`, `memorials`. Periods: `prehistoric`, `ancient_greek`, `etruscan`, `roman`, `byzantine`, `medieval`, `gothic`, `moorish_islamic`, `ottoman`, `renaissance`, `baroque`, `georgian_neoclassical`, `nineteenth_century`, `art_nouveau`, `twentieth_century_modern`, `world_war_ii`, `cold_war`. Style: `must_see`, `balanced`, `hidden_gems`. Pace: `relaxed`, `normal`, `brisk`.
 
-**Limits of the data.** Interests, periods and indoor or outdoor are derived from each sight's category and description. Walking times are estimates (straight-line distance x 1.3 at the chosen pace). Opening hours, ticket prices and bookings are not included. Bad input returns an error that names the allowed values.
+**Limits of the data.** Interests, periods and indoor or outdoor are derived from each sight's category and description. Walking times are estimates (straight-line distance x 1.3 at the chosen pace). Day-trip and comparison distances are straight-line and come without travel times. Opening hours, ticket prices and bookings are not included. Bad input returns an error that names the allowed values.
 
 ## Connect a client
 
@@ -129,6 +131,8 @@ Any MCP client that supports remote Streamable HTTP servers can connect to `http
 - "I'm staying near St. Stephen's Cathedral in Vienna. What can I walk to in 10 minutes?"
 - "Plan three days in Vienna for art and music lovers."
 - "Which European cities are best for Byzantine history?"
+- "What are good day trips from Florence?"
+- "Porto or Lisbon for a first trip? Compare them."
 - "Show me hidden gems in Paris for architecture lovers, indoors because it is raining."
 - "Tell me about the Colosseum, in German."
 - "Is there an audio walking tour for Seville?"
