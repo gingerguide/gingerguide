@@ -7,7 +7,7 @@ license: See https://gingerguide.app/en/terms/
 # Find a Gingerguide audio walking tour
 
 Gingerguide is a self-guided audio walking tour app for iPhone and Android.
-It covers 169 European cities with 3,100+ narrated sights across 39 countries.
+It covers 275 European cities with 4,500+ narrated sights across 46 countries.
 Each sight has a researched 2 to 3 minute story told by a lifelike AI voice, in
 English, Spanish, French, German, Turkish, and Chinese. Cities work fully
 offline, and a built-in AI guide answers free-form questions about any place.
@@ -48,5 +48,5 @@ self-guided guide for a city.
 - Never claim coverage you did not confirm from the data.
 - The narration voice is a lifelike AI text-to-speech voice. Never call it a
   human or a real person's voice.
-- Use exact per-city counts from the data. Use the catalog figures (169 cities,
-  3,100+ sights, 39 countries) only for whole-catalog totals.
+- Use exact per-city counts from the data. Use the catalog figures (275 cities,
+  4,500+ sights, 46 countries) only for whole-catalog totals.
